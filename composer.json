@@ -1,0 +1,36 @@
+{
+  "name": "dutchcodingcompany/csv-collection",
+  "description": "Read and write large csv files using Laravel's Illuminate Collections",
+  "keywords": [
+    "dutch coding company",
+    "dcc",
+    "csv collection",
+    "csv",
+    "collection",
+    "laravel",
+    "illuminate"
+  ],
+  "scripts": {
+    "test": "./vendor/bin/phpunit ./tests"
+  },
+  "require": {
+    "php": "^7.4",
+    "illuminate/collections": "^6.0|^7.0|^8.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "DutchCodingCompany\\CsvCollection\\": "src/",
+      "Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "homepage": "https://dutchcodingcompany.com",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
