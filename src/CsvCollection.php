@@ -116,6 +116,47 @@ class CsvCollection extends LazyCollection
     }
 
     /**
+     * Push an item into the collection and save the item to the csv file.
+     *
+     * @param string|null $file
+     * @param array $line
+     * @param array $options
+     * @return \App\CsvCollection
+     */
+    public function push(string $file, array $line, array $options = []): self
+    {
+        $options = array_merge(
+            $this->options, $options
+        );
+
+        $resource = fopen($file, 'a');
+
+        // Lock the file.
+        if (! flock($resource, LOCK_EX)) {
+            throw new IOException("Could not lock file");
+        }
+
+        $write = static fn(array $line) => fputcsv(
+            $resource, $line,
+            $options['delimiter'],
+            $options['enclosure'],
+            $options['escape'],
+        );
+
+        if ($options['header'] && $this->open($file)->count() === 0) {
+            $write(array_keys($line));
+        }
+
+        $write($line);
+
+        // Unlock the file.
+        flock($resource, LOCK_UN);
+        fclose($resource);
+
+        return $this->open($file, $options);
+    }
+
+    /**
      * Set the collection's options.
      *
      * @param array $options
