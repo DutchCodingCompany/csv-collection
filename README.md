@@ -45,7 +45,29 @@ To save the collection items to a file you may use the `save` method on the coll
 use DutchCodingCompany\CsvCollection\CsvCollection;
 
 CsvCollection::make(static function () {
-    //
+    yield [
+        'key' => 'value',
+    ];
+})
+    ->save('path/to/file.csv');
+```
+
+#### Model exports
+
+When exporting models a memory efficient method is to lazily iterate through the models and `yield` it's content.
+
+```php
+use DutchCodingCompany\CsvCollection\CsvCollection;
+
+CsvCollection::make(static function () {
+    $models = Model::query()->lazy();
+    
+    foreach ($models as $model){
+        yield $model->only([
+            'id',
+            //
+        ]);
+    }
 })
     ->save('path/to/file.csv');
 ```
@@ -80,7 +102,8 @@ When using a header, lines will contain an associated array. Otherwise, lines wi
 ]
 ```
 
-_**Note**: When saving a collection to a file the keys of the first element in the collection will be used as the header._
+_**Note**: When saving a collection to a file the keys of the first element in the collection will be used as the
+header._
 
 ## Testing
 
