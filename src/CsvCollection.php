@@ -164,7 +164,7 @@ class CsvCollection extends LazyCollection
     {
         $delimiters = [";" => 0, "," => 0, "\t" => 0, "|" => 0];
 
-        $handle = fopen($csvFile, "r");
+        $handle = fopen($file, "r");
         $firstLine = fgets($handle);
         fclose($handle);
         foreach ($delimiters as $delimiter => &$count) {
