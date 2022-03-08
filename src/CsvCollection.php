@@ -157,6 +157,24 @@ class CsvCollection extends LazyCollection
     }
 
     /**
+     * @param string $file Path to the CSV file
+     * @return string Delimiter
+     */
+    public static function detectDelimiter(string $file)
+    {
+        $delimiters = [";" => 0, "," => 0, "\t" => 0, "|" => 0];
+
+        $handle = fopen($csvFile, "r");
+        $firstLine = fgets($handle);
+        fclose($handle);
+        foreach ($delimiters as $delimiter => &$count) {
+            $count = count(str_getcsv($firstLine, $delimiter));
+        }
+
+        return array_search(max($delimiters), $delimiters);
+    }
+
+    /**
      * Set the collection's options.
      *
      * @param array $options
