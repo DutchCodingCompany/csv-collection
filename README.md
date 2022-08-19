@@ -84,6 +84,12 @@ The following options are available to suit your needs:
 These options could be passed to the `open` and `save` methods, be set using the `options` method, or be set as the
 global default using the static `defaults` method.
 
+The delimiter can be detected for a file by using the `detectDelimiter` method like this:
+
+```
+CsvCollection::detectDelimiter($path);
+```
+
 #### Header
 
 When using a header, lines will contain an associated array. Otherwise, lines will contain an indexed array.
