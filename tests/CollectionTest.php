@@ -7,9 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class CollectionTest extends TestCase
 {
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -17,10 +14,6 @@ class CollectionTest extends TestCase
         mkdir(__DIR__ . '/temporary');
     }
 
-    /**
-     * @test
-     * @return void
-     */
     public function testCanOpenWithoutHeader(): void
     {
         $collection = CsvCollection::make()->options(['header' => false])
@@ -38,10 +31,6 @@ class CollectionTest extends TestCase
         $this->assertSame(10, $collection->count());
     }
 
-    /**
-     * @test
-     * @return void
-     */
     public function testCanOpenWithHeader(): void
     {
         $collection = CsvCollection::make()
@@ -59,10 +48,6 @@ class CollectionTest extends TestCase
         $this->assertSame(10, $collection->count());
     }
 
-    /**
-     * @test
-     * @return void
-     */
     public function testCanSaveWithoutHeader(): void
     {
         $path = __DIR__ . '/temporary/save-without-header.csv';
@@ -83,10 +68,6 @@ class CollectionTest extends TestCase
         unlink($path);
     }
 
-    /**
-     * @test
-     * @return void
-     */
     public function testCanSaveWithHeader(): void
     {
         $path = __DIR__ . '/temporary/save-with-header.csv';
@@ -107,9 +88,6 @@ class CollectionTest extends TestCase
         unlink($path);
     }
 
-    /**
-     * @return void
-     */
     protected function tearDown(): void
     {
         rmdir(__DIR__ . '/temporary');
